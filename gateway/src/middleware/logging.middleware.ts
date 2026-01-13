@@ -64,13 +64,3 @@ export const requestLogger = (req: Request, res: Response, next: NextFunction): 
 };
 
 // Add response time header middleware
-export const responseTimeMiddleware = (_req: Request, res: Response, next: NextFunction): void => {
-  const startTime = Date.now();
-
-  res.on('finish', () => {
-    const duration = Date.now() - startTime;
-    res.setHeader('X-Response-Time', duration);
-  });
-
-  next();
-};

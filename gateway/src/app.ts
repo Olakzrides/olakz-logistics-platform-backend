@@ -6,7 +6,6 @@ import { generalRateLimiter } from './middleware/rate-limit.middleware';
 import {
   morganMiddleware,
   requestLogger,
-  responseTimeMiddleware,
 } from './middleware/logging.middleware';
 import {
   errorMiddleware,
@@ -32,8 +31,7 @@ app.use(helmet({
 // CORS
 app.use(corsMiddleware);
 
-// Response time tracking
-app.use(responseTimeMiddleware);
+
 
 // Request logging
 app.use(morganMiddleware);
