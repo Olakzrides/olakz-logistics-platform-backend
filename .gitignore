@@ -15,7 +15,7 @@ logs/
 npm-debug.log*
 
 # Build outputs
-dist/
+# dist/ - Commented out to allow committing built services for deployment
 build/
 *.tsbuildinfo
 
