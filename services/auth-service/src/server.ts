@@ -7,13 +7,13 @@ import config from './config';
 const PORT = config.port;
 
 // Start server
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   logger.info(`===========================================`);
   logger.info(`🚀 Auth Service started successfully`);
   logger.info(`===========================================`);
   logger.info(`Environment: ${config.env}`);
   logger.info(`Port: ${PORT}`);
-  logger.info(`Auth URL: http://localhost:${PORT}`);
+  logger.info(`Auth URL: http://0.0.0.0:${PORT}`);
   logger.info(`===========================================`);
   logger.info(`Database: ${config.supabase.url}`);
   logger.info(`JWT Expiry: Access ${config.jwt.accessTokenExpiry}, Refresh ${config.jwt.refreshTokenExpiry}`);

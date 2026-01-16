@@ -10,13 +10,13 @@ const logger_1 = __importDefault(require("./utils/logger"));
 const config_1 = __importDefault(require("./config"));
 const PORT = config_1.default.port;
 // Start server
-const server = app_1.default.listen(PORT, () => {
+const server = app_1.default.listen(PORT, '0.0.0.0', () => {
     logger_1.default.info(`===========================================`);
     logger_1.default.info(`🚀 Auth Service started successfully`);
     logger_1.default.info(`===========================================`);
     logger_1.default.info(`Environment: ${config_1.default.env}`);
     logger_1.default.info(`Port: ${PORT}`);
-    logger_1.default.info(`Auth URL: http://localhost:${PORT}`);
+    logger_1.default.info(`Auth URL: http://0.0.0.0:${PORT}`);
     logger_1.default.info(`===========================================`);
     logger_1.default.info(`Database: ${config_1.default.supabase.url}`);
     logger_1.default.info(`JWT Expiry: Access ${config_1.default.jwt.accessTokenExpiry}, Refresh ${config_1.default.jwt.refreshTokenExpiry}`);
