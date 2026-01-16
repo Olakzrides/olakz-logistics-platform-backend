@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const config = {
     env: process.env.NODE_ENV || 'development',
-    port: parseInt(process.env.PORT || '3003', 10),
+    port: parseInt(process.env.PORT || '4001', 10),
     supabase: {
         url: process.env.SUPABASE_URL || '',
         anonKey: process.env.SUPABASE_ANON_KEY || '',

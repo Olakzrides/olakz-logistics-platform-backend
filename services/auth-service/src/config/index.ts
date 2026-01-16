@@ -53,7 +53,7 @@ interface Config {
 
 const config: Config = {
   env: process.env.NODE_ENV || 'development',
-  port: parseInt(process.env.PORT || '3003', 10),
+  port: parseInt(process.env.PORT || '4001', 10),
 
   supabase: {
     url: process.env.SUPABASE_URL || '',

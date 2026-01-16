@@ -24,7 +24,7 @@ interface Config {
 
 const config: Config = {
   env: process.env.NODE_ENV || 'development',
-  port: parseInt(process.env.PORT || '3004', 10),
+  port: parseInt(process.env.PORT || '4002', 10),
 
   supabase: {
     url: process.env.SUPABASE_URL || '',

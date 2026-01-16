@@ -17,13 +17,13 @@ const PORT = config_1.default.port;
     logger_1.default.error('Failed to connect to database:', error);
 });
 // Start server
-const server = app_1.default.listen(PORT, () => {
+const server = app_1.default.listen(PORT, '0.0.0.0', () => {
     logger_1.default.info(`===========================================`);
     logger_1.default.info(`🚀 Core Logistics Service started successfully`);
     logger_1.default.info(`===========================================`);
     logger_1.default.info(`Environment: ${config_1.default.env}`);
     logger_1.default.info(`Port: ${PORT}`);
-    logger_1.default.info(`Service URL: http://localhost:${PORT}`);
+    logger_1.default.info(`Service URL: http://0.0.0.0:${PORT}`);
     logger_1.default.info(`===========================================`);
     logger_1.default.info(`Database: ${config_1.default.supabase.url}`);
     logger_1.default.info(`Analytics: ${config_1.default.analytics.enabled ? 'Enabled' : 'Disabled'}`);

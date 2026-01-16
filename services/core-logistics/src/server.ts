@@ -16,13 +16,13 @@ testConnection().catch((error) => {
 });
 
 // Start server
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   logger.info(`===========================================`);
   logger.info(`🚀 Core Logistics Service started successfully`);
   logger.info(`===========================================`);
   logger.info(`Environment: ${config.env}`);
   logger.info(`Port: ${PORT}`);
-  logger.info(`Service URL: http://localhost:${PORT}`);
+  logger.info(`Service URL: http://0.0.0.0:${PORT}`);
   logger.info(`===========================================`);
   logger.info(`Database: ${config.supabase.url}`);
   logger.info(`Analytics: ${config.analytics.enabled ? 'Enabled' : 'Disabled'}`);
