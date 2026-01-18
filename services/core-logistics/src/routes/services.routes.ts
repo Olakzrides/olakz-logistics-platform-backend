@@ -6,7 +6,9 @@ import { ServiceChannelRepository } from '../repositories/service-channel.reposi
 import { AdvertisementRepository } from '../repositories/advertisement.repository';
 import { UserSessionRepository } from '../repositories/user-session.repository';
 import { AnalyticsRepository } from '../repositories/analytics.repository';
-import { optionalAuth } from '../middleware/auth.middleware';
+import { requireAuth } from '../middleware/auth.middleware';
+import { validate } from '../middleware/validation.middleware';
+import { serviceSelectionSchema } from '../validators/store.validator';
 
 const router = Router();
 
@@ -24,7 +26,8 @@ const storeService = new StoreService(
 );
 const storeController = new StoreController(storeService);
 
-// Routes
-router.get('/init', optionalAuth, storeController.getStoreInit);
+// Services Routes
+router.post('/select', requireAuth, validate(serviceSelectionSchema), storeController.selectService);
+router.get('/context', requireAuth, storeController.getServiceContext);
 
 export default router;

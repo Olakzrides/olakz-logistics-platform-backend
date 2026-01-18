@@ -12,6 +12,7 @@ import { AppError } from './utils/errors';
 
 // Routes
 import storeRoutes from './routes/store.routes';
+import servicesRoutes from './routes/services.routes';
 import healthRoutes from './routes/health.routes';
 
 const app: Application = express();
@@ -46,9 +47,9 @@ app.get('/', (_req: Request, res: Response) => {
     status: 'running',
     endpoints: {
       health: '/health',
-      storeInit: 'GET /store/init',
-      selectService: 'POST /services/select',
-      serviceContext: 'GET /services/context',
+      storeInit: 'GET /api/store/init',
+      selectService: 'POST /api/services/select',
+      serviceContext: 'GET /api/services/context',
     },
   });
 });
@@ -57,8 +58,8 @@ app.get('/', (_req: Request, res: Response) => {
 app.use('/health', healthRoutes);
 
 // API Routes
-app.use('/store', storeRoutes);
-app.use('/services', storeRoutes);
+app.use('/api/store', storeRoutes);
+app.use('/api/services', servicesRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {

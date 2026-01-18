@@ -21,17 +21,20 @@ async function testConnection() {
             .select('count')
             .limit(1);
         if (error) {
-            logger_1.default.error('Supabase connection test failed:', error);
-            throw error;
+            logger_1.default.warn('Supabase connection test failed (non-critical):', error);
+            return false;
         }
         logger_1.default.info('✅ Supabase connection successful');
+        return true;
     }
     catch (error) {
-        logger_1.default.error('❌ Failed to connect to Supabase:', error);
-        process.exit(1);
+        logger_1.default.warn('❌ Failed to connect to Supabase (non-critical):', error);
+        return false;
     }
 }
-// Test connection on startup
-testConnection();
+// Test connection on startup (but don't exit on failure)
+testConnection().catch((error) => {
+    logger_1.default.warn('Supabase connection test failed during startup:', error);
+});
 exports.default = supabase;
 //# sourceMappingURL=supabase.js.map

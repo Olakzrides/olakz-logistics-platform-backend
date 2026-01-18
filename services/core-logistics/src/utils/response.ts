@@ -1,23 +1,40 @@
 import { Response } from 'express';
 
+interface ApiResponse<T = any> {
+  success: boolean;
+  message: string;
+  data?: T;
+  error?: {
+    code: string;
+    details?: any;
+  };
+  timestamp: string;
+}
+
 class ResponseUtil {
-  static success(res: Response, message: string, data: any = null, statusCode: number = 200) {
-    return res.status(statusCode).json({
+  static success<T>(
+    res: Response,
+    data: T,
+    message: string = 'Success',
+    statusCode: number = 200
+  ): Response {
+    const response: ApiResponse<T> = {
       success: true,
       message,
       data,
       timestamp: new Date().toISOString(),
-    });
+    };
+    return res.status(statusCode).json(response);
   }
 
   static error(
     res: Response,
-    message: string,
+    message: string = 'An error occurred',
     statusCode: number = 500,
     errorCode?: string,
     details?: any
-  ) {
-    return res.status(statusCode).json({
+  ): Response {
+    const response: ApiResponse = {
       success: false,
       message,
       error: {
@@ -25,20 +42,22 @@ class ResponseUtil {
         ...(details && { details }),
       },
       timestamp: new Date().toISOString(),
-    });
+    };
+    return res.status(statusCode).json(response);
   }
 
   private static getErrorCode(statusCode: number): string {
-    const codes: Record<number, string> = {
+    const errorCodes: { [key: number]: string } = {
       400: 'BAD_REQUEST',
       401: 'UNAUTHORIZED',
       403: 'FORBIDDEN',
       404: 'NOT_FOUND',
       409: 'CONFLICT',
       422: 'VALIDATION_ERROR',
+      429: 'RATE_LIMIT_EXCEEDED',
       500: 'INTERNAL_SERVER_ERROR',
     };
-    return codes[statusCode] || 'UNKNOWN_ERROR';
+    return errorCodes[statusCode] || 'UNKNOWN_ERROR';
   }
 }
 

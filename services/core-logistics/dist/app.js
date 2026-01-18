@@ -15,6 +15,7 @@ const response_1 = __importDefault(require("./utils/response"));
 const errors_1 = require("./utils/errors");
 // Routes
 const store_routes_1 = __importDefault(require("./routes/store.routes"));
+const services_routes_1 = __importDefault(require("./routes/services.routes"));
 const health_routes_1 = __importDefault(require("./routes/health.routes"));
 const app = (0, express_1.default)();
 // Trust proxy
@@ -41,17 +42,17 @@ app.get('/', (_req, res) => {
         status: 'running',
         endpoints: {
             health: '/health',
-            storeInit: 'GET /store/init',
-            selectService: 'POST /services/select',
-            serviceContext: 'GET /services/context',
+            storeInit: 'GET /api/store/init',
+            selectService: 'POST /api/services/select',
+            serviceContext: 'GET /api/services/context',
         },
     });
 });
 // Health check
 app.use('/health', health_routes_1.default);
 // API Routes
-app.use('/store', store_routes_1.default);
-app.use('/services', store_routes_1.default);
+app.use('/api/store', store_routes_1.default);
+app.use('/api/services', services_routes_1.default);
 // 404 handler
 app.use((req, res) => {
     response_1.default.error(res, `Route ${req.originalUrl} not found`, 404);

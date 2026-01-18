@@ -34,9 +34,9 @@ const server = app.listen(PORT, '0.0.0.0', () => {
   });
   logger.info(`===========================================`);
   logger.info(`Endpoints:`);
-  logger.info(`  - GET  /store/init`);
-  logger.info(`  - POST /services/select`);
-  logger.info(`  - GET  /services/context`);
+  logger.info(`  - GET  /api/store/init`);
+  logger.info(`  - POST /api/services/select`);
+  logger.info(`  - GET  /api/services/context`);
   logger.info(`  - GET  /health`);
   logger.info(`===========================================`);
 });
