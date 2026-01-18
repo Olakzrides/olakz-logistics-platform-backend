@@ -11,7 +11,7 @@ export class StoreController {
       const userId = req.user?.id;
       const storeData = await this.storeService.getStoreInitData(userId);
 
-      return ResponseUtil.success(res, 'Store data retrieved successfully', storeData);
+      return ResponseUtil.success(res, storeData, 'Store data retrieved successfully');
     } catch (error: any) {
       logger.error('Store init error:', error);
       return ResponseUtil.error(res, 'Failed to load store data', 500);
@@ -36,7 +36,6 @@ export class StoreController {
 
       return ResponseUtil.success(
         res,
-        'Service selected successfully',
         {
           session_id: session.id,
           service_context: {
@@ -44,6 +43,7 @@ export class StoreController {
             service_description: session.session_data.service_description,
           },
         },
+        'Service selected successfully',
         200
       );
     } catch (error: any) {
@@ -70,17 +70,16 @@ export class StoreController {
       if (!activeSession) {
         return ResponseUtil.success(
           res,
-          'No active service session',
           {
             has_active_session: false,
             message: 'No active service session',
-          }
+          },
+          'No active service session'
         );
       }
 
       return ResponseUtil.success(
         res,
-        'Service context retrieved successfully',
         {
           has_active_session: true,
           session_id: activeSession.id,
@@ -92,7 +91,8 @@ export class StoreController {
           session_data: activeSession.session_data,
           started_at: activeSession.started_at,
           last_activity_at: activeSession.last_activity_at,
-        }
+        },
+        'Service context retrieved successfully'
       );
     } catch (error: any) {
       logger.error('Get service context error:', error);

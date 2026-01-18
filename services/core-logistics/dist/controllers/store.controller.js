@@ -13,7 +13,7 @@ class StoreController {
             try {
                 const userId = req.user?.id;
                 const storeData = await this.storeService.getStoreInitData(userId);
-                return response_1.default.success(res, 'Store data retrieved successfully', storeData);
+                return response_1.default.success(res, storeData, 'Store data retrieved successfully');
             }
             catch (error) {
                 logger_1.default.error('Store init error:', error);
@@ -28,13 +28,13 @@ class StoreController {
                 }
                 const { service_channel_name, user_location, metadata } = req.body;
                 const session = await this.storeService.createServiceSession(userId, service_channel_name, { user_location, metadata });
-                return response_1.default.success(res, 'Service selected successfully', {
+                return response_1.default.success(res, {
                     session_id: session.id,
                     service_context: {
                         service_name: session.session_data.service_name,
                         service_description: session.session_data.service_description,
                     },
-                }, 200);
+                }, 'Service selected successfully', 200);
             }
             catch (error) {
                 logger_1.default.error('Service selection error:', error);
@@ -52,12 +52,12 @@ class StoreController {
                 }
                 const activeSession = await this.storeService.getUserActiveServiceSession(userId);
                 if (!activeSession) {
-                    return response_1.default.success(res, 'No active service session', {
+                    return response_1.default.success(res, {
                         has_active_session: false,
                         message: 'No active service session',
-                    });
+                    }, 'No active service session');
                 }
-                return response_1.default.success(res, 'Service context retrieved successfully', {
+                return response_1.default.success(res, {
                     has_active_session: true,
                     session_id: activeSession.id,
                     service_channel: {
@@ -68,7 +68,7 @@ class StoreController {
                     session_data: activeSession.session_data,
                     started_at: activeSession.started_at,
                     last_activity_at: activeSession.last_activity_at,
-                });
+                }, 'Service context retrieved successfully');
             }
             catch (error) {
                 logger_1.default.error('Get service context error:', error);
